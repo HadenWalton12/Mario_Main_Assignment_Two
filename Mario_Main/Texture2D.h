@@ -3,15 +3,15 @@
 #define _TEXTURE2D_H
 #include <SDL.h>
 #include <string>
-#include "commons.h"
-
+#include "Commons.h"
 
 class Texture2D
 {
 public:
+
 	Texture2D(SDL_Renderer* renderer);
-	
 	~Texture2D();
+
 	bool LoadFromFile(std::string path);
 	void Free();
 	void Render(Vector2D new_position, SDL_RendererFlip flip, double angle = 0.0);
@@ -21,6 +21,8 @@ public:
 
 
 private:
+	//These are amde private,only this class can access these variables
+
 	SDL_Renderer* m_renderer;
 	SDL_Texture* m_texture;
 

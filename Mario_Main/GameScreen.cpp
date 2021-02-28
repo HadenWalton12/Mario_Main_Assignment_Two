@@ -1,19 +1,15 @@
-#include "GameScreen.h"
+	#include "GameScreen.h"
 
 GameScreen::GameScreen(SDL_Renderer* renderer)
 {
-	SDL_Renderer* m_renderer = renderer;
+	m_renderer = renderer;
 }
 
 GameScreen::~GameScreen()
 {
-	m_renderer = nullptr;
+	m_renderer = nullptr; //This is to prevent 
 }
 
-void GameScreen::Render()
-{
-}
+void GameScreen::Render(){}
 
-void GameScreen::Update(float deltaTime, SDL_Event e)
-{
-}
+void GameScreen::Update(float deltaTime, SDL_Event e){}

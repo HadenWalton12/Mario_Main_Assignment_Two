@@ -1,11 +1,13 @@
 #pragma once
 #include "SDL.h"
-#include "commons.h"
-class GameScreen;
+#include "Commons.h"
+
+
+class GameScreen;//Forward declare gamescreen too allow its elements to be accessed
 class GameScreenManager
 {
 public:
-	GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen);
+	GameScreenManager(SDL_Renderer* renderer, SCREENS startScreen); //SDL_renderder struct and screen enum from commons
 	~GameScreenManager();
 
 	void Render();
@@ -17,6 +19,8 @@ public:
 private:
 	SDL_Renderer* m_renderer;
 	GameScreen* m_current_screen;
+
+
 
 };
 

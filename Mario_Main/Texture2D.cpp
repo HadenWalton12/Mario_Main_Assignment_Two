@@ -1,15 +1,10 @@
 #include "Texture2D.h"
-#include "SDL_image.h"
+#include <SDL_image.h>
 #include <iostream>
 
 Texture2D::Texture2D(SDL_Renderer* renderer)
 {
-	SDL_Renderer* m_renderer = nullptr;
-	SDL_Texture* m_texture = nullptr;
-
-	int m_width{};
-	int m_height{};
-
+	m_renderer = renderer;
 }
 
 Texture2D::~Texture2D()
@@ -23,13 +18,10 @@ Texture2D::~Texture2D()
 
 bool Texture2D::LoadFromFile(std::string path)
 {
-	Free();
-
-
 	//Load the image
 	SDL_Surface* p_surface = IMG_Load(path.c_str());
 	//colour key the image to be transparent
-SDL_SetColorKey(p_surface, SDL_TRUE, SDL_MapRGB(p_surface->format, 0, 0XFF, 0XFF));
+	SDL_SetColorKey(p_surface, SDL_TRUE, SDL_MapRGB(p_surface->format, 0, 0XFF, 0XFF));
 
 	if (p_surface != nullptr)
 	{
@@ -64,22 +56,19 @@ void Texture2D::Free()
 	}
 
 
-		m_width = 0;
+	m_width = 0;
 	m_height = 0;
-
 }
 
 void Texture2D::Render(Vector2D new_position, SDL_RendererFlip flip, double angle)
 {
-	//Clear the screen
-	SDL_SetRenderDrawColor(m_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	SDL_RenderClear(m_renderer);
-
+	
 	//set where to render the texture
-	SDL_Rect renderLocation = { 0,0,m_width, m_height };
-	//Render to screen
-	SDL_RenderCopyEx(m_renderer, m_texture, nullptr, &renderLocation, 0, nullptr, SDL_FLIP_NONE);
+	SDL_Rect renderLocation = { new_position.x,new_position.y,m_width, m_height };
 
-	//update the screen
-	SDL_RenderPresent(m_renderer);
+	//Render to screen
+	SDL_RenderCopyEx(m_renderer, m_texture, nullptr, &renderLocation, 0, nullptr, flip);
+
+ 
+
 }
