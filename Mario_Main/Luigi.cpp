@@ -1,6 +1,6 @@
 #include "Luigi.h"
 #include <iostream>
-Luigi::Luigi(SDL_Renderer* renderer, string imagePath, Vector2D start_position) : Character(renderer, imagePath, start_position)
+Luigi::Luigi(SDL_Renderer* renderer, string imagePath, Vector2D start_position , LevelMap* map) : Character(renderer, imagePath, start_position , map)
 {
 
 

@@ -2,12 +2,14 @@
 
 #include "Texture2D.h"//Upholds forward decloration
 
-Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position)
+Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map)
 {
 	m_renderer = renderer;
 	m_position = start_position;
 	m_texture = new Texture2D(m_renderer);
 	m_texture->LoadFromFile(imagePath);
+
+	m_current_level_map = map;
 
 	m_collision_radius = 15.0f;
 
@@ -54,7 +56,20 @@ void Character::Update(float deltaTime, SDL_Event e)
 {
 	JumpConditions(deltaTime);
 	MovementHandler(deltaTime);	
+	//collision position variables , we create two new enclosed variables 
+	int centralX_position = (int)(m_position.x + (m_texture->GetWidth() * 0.5)) / TILE_WIDTH; 
+	int foot_position = (int)(m_position.y + m_texture->GetHeight()) / TILE_HEIGHT;
 
+	//deal with gravity
+	if (m_current_level_map->GetTileAt(foot_position, centralX_position) == 0)
+	{
+		Gravity(deltaTime);
+	}
+	else
+	{
+		//collided with ground so we can jump again
+		m_can_jump = true;
+	}
 
 
 	
@@ -93,8 +108,15 @@ void Character::MoveRight(float deltaTime)
 
 void Character::Gravity(float deltaTime)
 {
-	m_position.y += GRAVITY * deltaTime;
-	m_can_jump = true;
+	if (m_position.y + 64 <= SCREEN_HEIGHT)
+	{
+		m_position.y += GRAVITY * deltaTime;
+	}
+	else
+	{
+		m_can_jump = true;
+	}
+
 	
 }
 

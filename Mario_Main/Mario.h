@@ -11,7 +11,7 @@ class Mario : public Character
 {
 
 public:
-	Mario(SDL_Renderer* renderer, string imagePath, Vector2D start_position);
+	Mario(SDL_Renderer* renderer, string imagePath, Vector2D , LevelMap* map);
 	~Mario();
 	
 	

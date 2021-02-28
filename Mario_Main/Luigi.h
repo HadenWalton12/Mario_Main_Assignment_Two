@@ -10,7 +10,7 @@ using namespace std;
 class Luigi : public Character
 {
 public:
-	Luigi(SDL_Renderer* renderer, string imagePath, Vector2D start_position);
+	Luigi(SDL_Renderer* renderer, string imagePath, Vector2D start_position, LevelMap* map);
 	~Luigi();
 
 

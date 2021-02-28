@@ -5,7 +5,7 @@
 
 
 
-
+#include "LevelMap.h"
 #include <iostream>
 #include <string>
 
@@ -13,7 +13,7 @@ class Texture2D; //Forward decleration
 class Character
 {
 public:
-	Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position);
+	Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map);
 	~Character();
 	Rect2D GetCollisionBox();
 	virtual void Render();
@@ -46,5 +46,7 @@ protected://we use the idnetifier protecto	r so only child classes and this clas
 	float m_jump_force;
 	float m_collision_radius;
 
+private:
+	LevelMap* m_current_level_map;
 };
 
