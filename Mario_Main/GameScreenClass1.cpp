@@ -3,8 +3,9 @@
 #include <iostream>
 GameScreenClass1::GameScreenClass1(SDL_Renderer* renderer) : GameScreen(renderer)
 {
-	SetUpLevel();
 	SetLevelMap();
+	SetUpLevel();
+	
 	m_level_map = nullptr;
 }
 
@@ -43,7 +44,7 @@ bool GameScreenClass1::SetUpLevel()
 
 	//load texture
 	m_background_texture = new Texture2D(m_renderer);
-	if (!m_background_texture->LoadFromFile("Images/test.bmp"))
+	if (!m_background_texture->LoadFromFile("Images/BackgroundMB.png"))
 	{
 		std::cout << "Failed to load background texture!" << std::endl;
 		return false;
@@ -58,18 +59,19 @@ bool GameScreenClass1::SetUpLevel()
 void GameScreenClass1::SetLevelMap()
 {
 	int map[MAP_HEIGHT][MAP_WIDTH] = { { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-									   { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-									   { 1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1 },
-									   { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-									   { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-									   { 0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0 },
-									   { 1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1 },
-									   { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-									   { 0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0 },
-									   { 1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1 },
-									   { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-									   { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
-									   { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 } };//We have populated each individual element of the two dimensional array with either 0/1
+						  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+						  { 1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1 },
+						  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+						  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+						  { 0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0 },
+						  { 1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1 },
+						  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+						  { 0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0 },
+						  { 1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1 },
+						  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+						  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
+						  { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 } };//We have populated each individual element of the two dimensional array with either 0/1
+	
 
 	//clear any old maps
 	if (m_level_map != nullptr)
@@ -79,5 +81,5 @@ void GameScreenClass1::SetLevelMap()
 
 	//set the new one
 	m_level_map = new LevelMap(map);
-
+	//This works and nothing needs changing here
 }

@@ -2,10 +2,8 @@
 #include "SDL.h"
 #include "Commons.h"
 #include "constants.h"
-
-
-
 #include "LevelMap.h"
+
 #include <iostream>
 #include <string>
 
