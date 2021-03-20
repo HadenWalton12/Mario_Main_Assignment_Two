@@ -34,6 +34,16 @@ PowBlock::~PowBlock()
 
 void PowBlock::render()
 {
+	if (m_num_hits_left > 0)
+	{
+		int sprite_position = m_single_sprite_w*(m_num_hits_left - 1);//Gets us each portion we want to draw
+		
+		SDL_Rect spritesheet = { sprite_position, 0 , m_single_sprite_w , m_single_sprite_h };//allows us to select one of 3 parts of the sprite sheet
+	
+		SDL_Rect Rect = { m_position.x ,m_position.y  ,m_single_sprite_w ,m_single_sprite_h };//Sets where we want to draw it using Rect function
+
+		m_texture->Render(spritesheet, Rect, SDL_FLIP_NONE);
+	}
 }
 
 int PowBlock::TakeHit()
@@ -42,7 +52,7 @@ int PowBlock::TakeHit()
 	if (m_num_hits_left <= 0)
 	{
 		m_num_hits_left = 0;
-		m_level_map->changeTileAt(8, 7, 0);
+		m_level_map->changeTileAt(8, 7, 0);//Comment upholds this regarding the comment, we pass in the row,column then the value we want that tile to change to.
 		m_level_map->changeTileAt(8, 8, 0);
 
 		//This statement ensures that if the powblock value turns 0 , we change the tilemap to allow mario or luigi to jump past where the jump block use to be.

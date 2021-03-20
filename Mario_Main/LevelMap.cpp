@@ -58,5 +58,5 @@ int LevelMap::GetTileAt(unsigned int h, unsigned int w)
 
 void LevelMap::changeTileAt(unsigned int row, unsigned int column, unsigned int new_value)
 {
-	m_map[row][column] = new_value;
+	m_map[row][column] = new_value; //when we call this , we need to pass in the row in the tile map, the colum, then give the new value
 }
