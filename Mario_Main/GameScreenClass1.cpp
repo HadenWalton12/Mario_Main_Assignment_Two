@@ -1,4 +1,5 @@
 #include "GameScreenClass1.h"
+#include "PowBlock.h" //Uphold forward decleration			
 #include "Texture2D.h" //Uphold forward decleration
 #include <iostream>
 GameScreenClass1::GameScreenClass1(SDL_Renderer* renderer) : GameScreen(renderer)
@@ -16,6 +17,7 @@ GameScreenClass1::~GameScreenClass1()
 	delete _mario;
 	_mario = nullptr;
 
+	m_pow_block = nullptr;
 }
 
 void GameScreenClass1::Render()
@@ -24,6 +26,7 @@ void GameScreenClass1::Render()
 	m_background_texture->Render(Vector2D(), SDL_FLIP_NONE);//m_background calls the render function from Texture2D class
 	_mario->Render();
 	_luigi-> Render();
+	m_pow_block->render();
 }
 
 void GameScreenClass1::Update(float deltaTime, SDL_Event e)
@@ -36,6 +39,27 @@ void GameScreenClass1::Update(float deltaTime, SDL_Event e)
 	//update character
 	_mario->Update(deltaTime, e);
 	_luigi->Update(deltaTime, e);
+	updatePowBlock();
+
+}
+
+void GameScreenClass1::updatePowBlock()
+{
+	if (Collisions::Instance()->Box(m_pow_block->GetCollisionBox(), _mario->GetCollisionBox()))//call instance function , then load collision box then pass in pow block and mario
+	{
+		if (m_pow_block->IsAvailable())
+		{
+			//collided while jumping
+			//if (_mario->())
+			{
+			//	DoScreenShake();
+			//	m_pow_block->TakeHit();
+				//mario->CancelJump();
+			}
+
+			
+		}
+	}
 
 }
 
@@ -52,7 +76,7 @@ bool GameScreenClass1::SetUpLevel()
 	//set up player character
 	_mario = new Mario(m_renderer, "Images/Mario.png", Vector2D(64, 330), m_level_map);
 	_luigi = new Luigi(m_renderer, "Images/luigi.png", Vector2D(64, 330), m_level_map);
-
+	m_pow_block = new PowBlock(m_renderer, m_level_map);//Creates powblock,pass in values it needs
 	return true;
 }
 

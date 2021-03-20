@@ -15,7 +15,7 @@ public:
 
 
 	void render();
-	int GetCollisionBox() { return m_texture->GetWidth(), m_texture->GetHeight(); };
+	Rect2D GetCollisionBox() { return Rect2D(m_position.x, m_position.y, (m_texture->GetWidth() / 3), m_texture->GetHeight()); };//Inline function, passes us x & y positions from which allow us to generate coliision box
 	int TakeHit();
 	bool IsAvailable() { return m_num_hits_left > 0; }//This will return true making powblock avaliable.
 

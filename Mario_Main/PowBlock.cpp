@@ -40,7 +40,7 @@ void PowBlock::render()
 		
 		SDL_Rect spritesheet = { sprite_position, 0 , m_single_sprite_w , m_single_sprite_h };//allows us to select one of 3 parts of the sprite sheet
 	
-		SDL_Rect Rect = { m_position.x ,m_position.y  ,m_single_sprite_w ,m_single_sprite_h };//Sets where we want to draw it using Rect function
+		SDL_Rect Rect = {(int) (m_position.x ),(int)(m_position.y)  ,m_single_sprite_w ,m_single_sprite_h };//Sets where we want to draw it using Rect function
 
 		m_texture->Render(spritesheet, Rect, SDL_FLIP_NONE);
 	}

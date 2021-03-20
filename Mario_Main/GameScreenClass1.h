@@ -11,6 +11,7 @@ class Texture2D;//Forward Declation ,allows Texture 2D class and variables to be
 #include "Mario.h"
 //LevelMap
 #include "LevelMap.h"
+class PowBlock;
 class GameScreenClass1 : GameScreen //GanescreenClass1 is a child class to gamescreen , gamescreen is parent class
 {
 public:
@@ -20,7 +21,7 @@ public:
 	void Render() override;
 	void Update(float deltaTime, SDL_Event event) override;
 
-
+	void updatePowBlock();			
 
 private:
 
@@ -32,6 +33,7 @@ private:
 	bool SetUpLevel();
 	void SetLevelMap();
 
+	PowBlock* m_pow_block;
 protected:
 
 
