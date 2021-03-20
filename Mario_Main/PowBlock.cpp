@@ -45,11 +45,10 @@ void PowBlock::render()
 		m_texture->Render(spritesheet, Rect, SDL_FLIP_NONE);
 	}
 }
-
-int PowBlock::TakeHit()
+	void PowBlock::TakeHit()
 {
-	m_num_hits_left - 1;
-	if (m_num_hits_left <= 0)
+	m_num_hits_left--;
+	if (m_num_hits_left >= 0)
 	{
 		m_num_hits_left = 0;
 		m_level_map->changeTileAt(8, 7, 0);//Comment upholds this regarding the comment, we pass in the row,column then the value we want that tile to change to.
@@ -58,5 +57,5 @@ int PowBlock::TakeHit()
 		//This statement ensures that if the powblock value turns 0 , we change the tilemap to allow mario or luigi to jump past where the jump block use to be.
 		//Done by manipulating the tilemap as seen.
 	}
-	return 0;
+	
 }
