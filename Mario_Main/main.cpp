@@ -1,24 +1,21 @@
-//SDL Library Functions
+
+
+#include "constants.h"//Holds our "#defines"
+#include "Commons.h" //Holds all structs , such as rect and screen enums
+
+
 #include "GameScreenManager.h"
-#include <iostream>//Input/OutPut stream used for inputting and outputting data
 #include "Texture2D.h"
-#include "constants.h" //Includes screen constants
-#include "Commons.h"
 
 
 
+//SDL Library Functions
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 
-
-
-
-//Globals
-SDL_Window* game_window = nullptr; //Creating a global pointer, declaring the a struct pointer (SDL_window struct) to g_window, with the initialised value to null (makes memory address to 0000000)
-GameScreenManager* game_screen_manager; 
-SDL_Renderer* game_renderer = nullptr;
-Uint32 g_old_time;
+//Allows Input/Output Stream to work
+#include <iostream>
 
 //Function prototypes
 bool InitialiseSDL();
@@ -26,16 +23,18 @@ void CLoseSDL();
 bool update();
 void Render();
 
-
-
-
+//Globals
+SDL_Window* game_window = nullptr; //Creating a global pointer, declaring the a struct pointer (SDL_window struct) to g_window, with the initialised value to null (makes memory address to 0000000)
+GameScreenManager* game_screen_manager; 
+SDL_Renderer* game_renderer = nullptr;
+Uint32 g_old_time;
 
 int main(int argc, char* args[])
 {
 	//Checks if we want to quit
 	bool quit = false;
 
-	//check if sdl was setup correctly
+	//Checks If our intialSDL function is set up properly , if false SDL wont setup
 	if (InitialiseSDL())
 	{
 		game_screen_manager = new GameScreenManager(game_renderer, SCREEN_LEVEL1);
@@ -63,12 +62,12 @@ int main(int argc, char* args[])
 
 bool InitialiseSDL()
 {
-	//Setup SDL
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)//the SDL_INIT_VIDEO Flag is passed into SDL_INIT function to specify we are using a video subsystem (its a sub-system since this is contextualised from the SDL System0
+	//SDL SetUp
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)//the SDL_INIT_VIDEO Flag is passed into SDL_INIT function to specify we are using a video subsystem (its a sub-system since this is contextualised from the SDL System)
 	{
 		std::cout << "SDL did not initialise. Error: " << SDL_GetError();
 		return false;
-		/*The flag SDL*/
+		
 	}
 	else
 	{
@@ -85,16 +84,17 @@ bool InitialiseSDL()
 			SDL_WINDOW_SHOWN); //Flag - a flag can be considered as a specfic parameter which gives in this instance, a window , specific properties
 
 
+		//Nested Conditional , further intialises
 
-		//This conditional checks whether the game_window was created, since when created a new value that isnt its intial value "null" would replace this
-		if (game_window == nullptr)
+		if (game_window == nullptr)//This conditional checks whether the game_window was created, since when created a new value that isnt its intial value "null" would replace this
 		{
 			//window failed
 			std::cout << "Window was not created. Error: " << SDL_GetError();
 			return false;
 		}
+
 		game_renderer = SDL_CreateRenderer(game_window, -1, SDL_RENDERER_ACCELERATED);
-		if (game_renderer != nullptr)
+		if (game_renderer != nullptr)//Conditonal to work needs to be true, will be true since we intialise game_renderer above to equal SDL_CreateRenderer function with its parameters./
 		{
 			//init PNG loading
 			int imageFlags = IMG_INIT_PNG;
@@ -104,16 +104,12 @@ bool InitialiseSDL()
 				return false;
 			}
 		}
+
 		else
 		{
 			std::cout << "Renderer could not initialise. Error: " << SDL_GetError();
 			return false;
 		}
-		//Load the background texture
-		//Load the background texture
-
-
-
 	}
 
 	return true;
@@ -123,14 +119,12 @@ bool InitialiseSDL()
 void CLoseSDL()//Free's up memory by closing down the SDL functions we generated
 {
 	//release the window
-	SDL_DestroyWindow(game_window);//Destroys The game window we created by using the pointer
+	SDL_DestroyWindow(game_window);//Destroys The game window we created via the intialiseSDL function
 	game_window = nullptr;//Since the game_window would of be fiven value from generating the gamewindow, this returns this pointer back to its null value
 
 	//quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
-
-	//clear the texture
 
 	//release the renderer
 	SDL_DestroyRenderer(game_renderer);
@@ -148,13 +142,9 @@ void CLoseSDL()//Free's up memory by closing down the SDL functions we generated
 bool update()
 {
 	Uint32 new_time = SDL_GetTicks();
-	/**/
 //Created an event handler, this will handle what happens if an event occurs,
 	SDL_Event Event;
 	SDL_PollEvent(&Event);
-
-
-
 
 	//We used switch statements since depending on the event , the case with the event can be executed
 	switch (Event.type)
@@ -190,16 +180,11 @@ void Render()
 	SDL_SetRenderDrawColor(game_renderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(game_renderer);
 
-
-	game_screen_manager->Render();//THis calls the gamescreenmanagers Render function
-
+	//This calls the gamescreenmanagers Render function
+	game_screen_manager->Render();
+	
 	//update the screen
 	SDL_RenderPresent(game_renderer);
-
-
-
-
-
 
 }
 

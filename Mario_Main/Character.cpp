@@ -1,5 +1,4 @@
 #include "Character.h"
-
 #include "Texture2D.h"//Upholds forward decloration
 
 Character::Character(SDL_Renderer* renderer, std::string imagePath, Vector2D start_position, LevelMap* map)
