@@ -141,7 +141,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="GameScreenClass1.cpp" />
+    <ClCompile Include="GameScreenManager.cpp" />
+    <ClCompile Include="Luigi.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mario.cpp" />
+    <ClCompile Include="PowBlock.cpp" />
+    <ClCompile Include="Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="SDL2\SDL\SDL2.lib" />
@@ -151,7 +160,16 @@
     <Library Include="SDL2\SDL\SDL2_mixer.lib" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="commons.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="GameScreenClass1.h" />
+    <ClInclude Include="GameScreenManager.h" />
+    <ClInclude Include="LevelMap.h" />
+    <ClInclude Include="Luigi.h" />
+    <ClInclude Include="PowBlock.h" />
+    <ClInclude Include="Texture2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
