@@ -23,6 +23,13 @@ PowBlock::PowBlock(SDL_Renderer* renderer, LevelMap* map)
 
 PowBlock::~PowBlock()
 {
+
+	delete m_texture;
+	m_texture = nullptr;
+
+	//We dont delete these since other classes are using these variables of the same name, to do would cause a crash.
+	m_renderer = nullptr;
+	m_level_map = nullptr;
 }
 
 void PowBlock::render()
