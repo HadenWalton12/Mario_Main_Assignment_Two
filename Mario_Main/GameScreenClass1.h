@@ -32,8 +32,15 @@ private:
 
 	bool SetUpLevel();
 	void SetLevelMap();
+	void DoShakeScreen();
 
 	PowBlock* m_pow_block;
+
+	bool m_screenshake;
+	float m_shake_time;
+	float m_wobble;
+	float m_background_yPos;
+
 protected:
 
 

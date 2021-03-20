@@ -22,6 +22,10 @@ public:
 Rect2D GetCollisionBox();
 	float GetCollisionRadius();
 
+
+	bool isJumping() { return m_jumping; };
+	bool CancelJump() { return m_jumping = false; };
+
 protected://we use the idnetifier protecto	r so only child classes and this class can inherit/use thes variables
 
 	SDL_Renderer* m_renderer;

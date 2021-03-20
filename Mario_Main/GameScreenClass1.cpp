@@ -23,7 +23,7 @@ GameScreenClass1::~GameScreenClass1()
 void GameScreenClass1::Render()
 {
 	//draw the background
-	m_background_texture->Render(Vector2D(), SDL_FLIP_NONE);//m_background calls the render function from Texture2D class
+	m_background_texture->Render(Vector2D(0, m_background_yPos), SDL_FLIP_NONE);//m_background calls the render function from Texture2D class
 	_mario->Render();
 	_luigi-> Render();
 	m_pow_block->render();
@@ -31,6 +31,24 @@ void GameScreenClass1::Render()
 
 void GameScreenClass1::Update(float deltaTime, SDL_Event e)
 {
+/*
+ * do the screen shake if required
+ */
+	if (m_screenshake)
+	{
+		m_shake_time -= deltaTime;
+		m_wobble++;
+		m_background_yPos = sin(m_wobble);//Use sin function to create each wobble
+		m_background_yPos *= 3.0f;//Used to move screen y position up and down 
+
+		//end shake after duration from above 
+		if (m_shake_time <= 0.0f)
+		{
+			m_shake_time = false;
+			m_background_yPos = 0.0f;//Sets y position to default
+		}
+	}
+
 	if (Collisions::Instance()->Circle(_mario, _luigi))
 	{
 		cout << "Circle hit!" << endl;
@@ -40,21 +58,23 @@ void GameScreenClass1::Update(float deltaTime, SDL_Event e)
 	_mario->Update(deltaTime, e);
 	_luigi->Update(deltaTime, e);
 	updatePowBlock();
+	m_screenshake = false;
+	m_background_yPos = 0.0f;
 
 }
 
 void GameScreenClass1::updatePowBlock()
 {
-	if (Collisions::Instance()->Box(m_pow_block->GetCollisionBox(), _mario->GetCollisionBox()))//call instance function , then load collision box then pass in pow block and mario
+	if (Collisions::Instance()->Box(m_pow_block->GetCollisionBox(), _mario->GetCollisionBox()) )//call instance function , then load collision box then pass in pow block and mario
 	{
 		if (m_pow_block->IsAvailable())
 		{
 			//collided while jumping
-			//if (_mario->())
+			if (_mario->isJumping())
 			{
-			//	DoScreenShake();
-			//	m_pow_block->TakeHit();
-				//mario->CancelJump();
+				DoShakeScreen();
+				m_pow_block->TakeHit();
+				_mario->CancelJump();
 			}
 
 			
@@ -106,4 +126,12 @@ void GameScreenClass1::SetLevelMap()
 	//set the new one
 	m_level_map = new LevelMap(map);
 	//This works and nothing needs changing here
+}
+
+void GameScreenClass1::DoShakeScreen()
+{
+	m_screenshake = true;
+	m_shake_time = SHAKE_DURATION;
+	m_wobble = 0.0f;
+
 }
