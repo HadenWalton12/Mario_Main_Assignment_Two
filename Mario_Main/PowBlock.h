@@ -16,7 +16,7 @@ public:
 
 	void render();
 	int GetCollisionBox() { return m_texture->GetWidth(), m_texture->GetHeight(); };
-	int TakeHit() { return 0; };
+	int TakeHit();
 	bool IsAvailable() { return m_num_hits_left > 0; }//This will return true making powblock avaliable.
 
 

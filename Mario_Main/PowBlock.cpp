@@ -35,3 +35,18 @@ PowBlock::~PowBlock()
 void PowBlock::render()
 {
 }
+
+int PowBlock::TakeHit()
+{
+	m_num_hits_left - 1;
+	if (m_num_hits_left <= 0)
+	{
+		m_num_hits_left = 0;
+		m_level_map->changeTileAt(8, 7, 0);
+		m_level_map->changeTileAt(8, 8, 0);
+
+		//This statement ensures that if the powblock value turns 0 , we change the tilemap to allow mario or luigi to jump past where the jump block use to be.
+		//Done by manipulating the tilemap as seen.
+	}
+	return 0;
+}
