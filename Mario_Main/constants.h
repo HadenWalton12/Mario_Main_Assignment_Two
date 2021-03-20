@@ -7,7 +7,7 @@
 #define INITIAL_JUMP_FORCE 1000
 #define JUMP_FORCE_DECREMENT 400
 
-#define SHAKE_DURATION = 0.25f;
+#define SHAKE_DURATION 0.25f
 
 //Used to define how many tiles we want up and down on our map
 #define MAP_HEIGHT 13

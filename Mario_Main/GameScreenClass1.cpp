@@ -31,9 +31,9 @@ void GameScreenClass1::Render()
 
 void GameScreenClass1::Update(float deltaTime, SDL_Event e)
 {
-/*
- * do the screen shake if required
- */
+	/*
+* do the screen shake if required
+*/
 	if (m_screenshake)
 	{
 		m_shake_time -= deltaTime;
@@ -58,8 +58,7 @@ void GameScreenClass1::Update(float deltaTime, SDL_Event e)
 	_mario->Update(deltaTime, e);
 	_luigi->Update(deltaTime, e);
 	updatePowBlock();
-	m_screenshake = false;
-	m_background_yPos = 0.0f;
+
 
 }
 
@@ -97,6 +96,8 @@ bool GameScreenClass1::SetUpLevel()
 	_mario = new Mario(m_renderer, "Images/Mario.png", Vector2D(64, 330), m_level_map);
 	_luigi = new Luigi(m_renderer, "Images/luigi.png", Vector2D(64, 330), m_level_map);
 	m_pow_block = new PowBlock(m_renderer, m_level_map);//Creates powblock,pass in values it needs
+	m_screenshake = false;
+	m_background_yPos = 0.0f;
 	return true;
 }
 
